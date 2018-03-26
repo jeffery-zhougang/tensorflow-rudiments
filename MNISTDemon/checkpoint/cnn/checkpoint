@@ -1,2 +1,0 @@
-model_checkpoint_path: "mnist-cnn"
-all_model_checkpoint_paths: "mnist-cnn"

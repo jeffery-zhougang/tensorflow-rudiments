@@ -3,7 +3,7 @@
 '''
 Created on Jan 24, 2018
 
-@author: Administrator
+@author: jeffery.zhougang
 '''
 
 from tensorflow.examples.tutorials.mnist import input_data

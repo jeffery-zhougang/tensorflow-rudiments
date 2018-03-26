@@ -36,15 +36,16 @@ class NetWork(object):
         loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=tf.argmax(labels, 1)), name='loss')
         return loss
     
+    def accuracy(self, logits, labels):
+        accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(logits, 1), tf.argmax(labels, 1)), tf.float32), name='accuracy')
+        return accuracy
+    
     def train_op(self, lr, loss, optimizer=tf.train.AdamOptimizer):
         train_op = optimizer(lr).minimize(loss)
         return train_op
     
-    def accuracy(self, logits, labels):
-        accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(logits, 1), tf.argmax(labels, 1)), tf.float32), name='accuracy')
-        return accuracy
-
     def summary(self, *args):
+        
         for tensor in args:
             tf.summary.scalar(tensor.name, tensor)
         return tf.summary.merge_all()

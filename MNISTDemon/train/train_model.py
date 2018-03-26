@@ -12,7 +12,7 @@ import tensorflow as tf
 
 from tensorflow.examples.tutorials.mnist import input_data
 
-from networks.cnn1 import CNN as network
+from networks.cnn import CNN as network
 
 # 加载MNIST数据集
 mnist = input_data.read_data_sets('..\\dataset\\MNIST', one_hot=True)
@@ -22,8 +22,8 @@ print('loading data done......')
 # 训练参数
 lr=0.001
 class_num=10
-batch_size=32
-num_step=50
+batch_size=64
+num_step=100
 val_step=10
 
 save_dir='..\\checkpoint\\cnn'
@@ -47,7 +47,7 @@ with tf.Session() as sess:
     
     # 初始化SAVER对象和日志对象
     saver = tf.train.Saver(tf.global_variables())
-    train_writer = tf.summary.FileWriter(log_dir)
+    train_writer = tf.summary.FileWriter(log_dir, model)
     
     step=1
     print('===== start training =====')

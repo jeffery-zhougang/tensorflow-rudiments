@@ -47,7 +47,7 @@ with tf.Session() as sess:
     
     # 初始化SAVER对象和日志对象
     saver = tf.train.Saver(tf.global_variables())
-    train_writer = tf.summary.FileWriter(log_dir, model)
+    train_writer = tf.summary.FileWriter(log_dir, tf.get_default_graph())
     
     step=1
     print('===== start training =====')

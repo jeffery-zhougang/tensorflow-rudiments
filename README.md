@@ -1,4 +1,4 @@
-# tensorflow-rudiments tensorflow入门
+# Tensorflow入门
 
 ## 1、MNSIT数据集分类
 1-1、逻辑回归分类MNIST数据集

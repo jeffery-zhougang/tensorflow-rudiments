@@ -12,7 +12,9 @@ import tensorflow as tf
 
 from tensorflow.examples.tutorials.mnist import input_data
 
-from networks.cnn import CNN as network
+from networks.cnn import CNN as network_cnn
+from networks.rnn import RNN as network_rnn
+
 
 # 加载MNIST数据集
 mnist = input_data.read_data_sets('..\\dataset\\MNIST', one_hot=True)
@@ -22,12 +24,22 @@ print('loading data done......')
 # 训练参数
 lr=0.001
 class_num=10
-batch_size=64
-num_step=100
+batch_size=128
+num_step=200
 val_step=10
 
-save_dir='..\\checkpoint\\cnn'
-log_dir='..\\log\\cnn'
+op='CNN'
+if op=='CNN':
+    save_dir='..\\checkpoint\\cnn'
+    log_dir='..\\log\\cnn'
+    network=network_cnn
+elif op=='RNN':
+    save_dir='..\\checkpoint\\rnn'
+    log_dir='..\\log\\rnn'
+    network=network_rnn
+else:
+    pass
+
 with tf.Session() as sess:
 
     inputs = tf.placeholder(dtype=tf.float32, shape=[None, 784], name='image_batch')
@@ -69,9 +81,10 @@ with tf.Session() as sess:
         step+=1
         
     # 最后保存模型    
+    print('===== save model =====')
     if not os.path.isdir(save_dir):
         os.mkdir(save_dir)
-    saver.save(sess, os.path.join(save_dir,'mnist-cnn'))
+    saver.save(sess, os.path.join(save_dir,'mnist'))
 
 
 

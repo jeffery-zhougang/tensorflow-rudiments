@@ -14,7 +14,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 from networks.cnn import CNN as network_cnn
 from networks.rnn import RNN as network_rnn
-
+from networks.LogisticRegression import LR as network_lr
 
 # 加载MNIST数据集
 mnist = input_data.read_data_sets('..\\dataset\\MNIST', one_hot=True)
@@ -25,10 +25,10 @@ print('loading data done......')
 lr=0.001
 class_num=10
 batch_size=128
-num_step=200
+num_step=500
 val_step=10
 
-op='CNN'
+op='LR'
 if op=='CNN':
     save_dir='..\\checkpoint\\cnn'
     log_dir='..\\log\\cnn'
@@ -38,7 +38,9 @@ elif op=='RNN':
     log_dir='..\\log\\rnn'
     network=network_rnn
 else:
-    pass
+    save_dir='..\\checkpoint\\lr'
+    log_dir='..\\log\\lr'
+    network=network_lr
 
 with tf.Session() as sess:
 
